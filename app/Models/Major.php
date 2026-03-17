@@ -15,4 +15,9 @@ class Major extends Model
         'code',
         'description',
     ];
+
+    public function classRooms()
+    {
+        return $this->hasMany(ClassRoom::class);
+    }
 }

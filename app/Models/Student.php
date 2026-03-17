@@ -19,4 +19,18 @@ class Student extends Model
         'address',
         'status',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function classRoom()
+    {
+        return $this->belongsTo(ClassRoom::class);
+    }
+
+    public function bill() {
+        return $this->hasMany(Bill::class);
+    }
 }

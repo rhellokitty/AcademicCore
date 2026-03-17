@@ -14,4 +14,14 @@ class TeacherClassroom extends Model
         'teacher_id',
         'classroom_id',
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function classRooms()
+    {
+        return $this->belongsTo(ClassRoom::class);
+    }
 }

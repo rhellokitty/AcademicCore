@@ -12,7 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+
+            $table->foreignUuid('bill_id')->constrained('bills');
+
+            $table->decimal('amount');
+            $table->date('payment_date');
+            $table->enum('status', ['paid', 'unpaid', 'pending'])->default('unpaid');
+
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -19,4 +19,24 @@ class ClassRoom extends Model
         'year_start',
         'year_end',
     ];
+
+    public function teacher()
+    {
+        return $this->belongsTo(Teacher::class);
+    }
+
+    public function major()
+    {
+        return $this->belongsTo(Major::class);
+    }
+
+    public function schoolLevel()
+    {
+        return $this->belongsTo(SchoolLevel::class);
+    }
+
+    public function teacherClassrooms()
+    {
+        return $this->hasMany(TeacherClassroom::class);
+    }
 }

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('school_levels', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
-            $table->string('name');
-            $table->longText('description');
+            $table->string('name')->unique();
+            $table->longText('description')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

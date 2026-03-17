@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('attendances', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
+
+            $table->foreignUuid('student_id')->constrained('students');
+            $table->date('date');
+            $table->enum('status', ['attend', 'permission', 'sick', 'alpha'])->default('alpha');
             $table->timestamps();
         });
     }

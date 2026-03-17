@@ -22,4 +22,15 @@ class Bill extends Model
     protected $casts = [
         'amount' => 'decimal:2',
     ];
+
+
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    public function paymentType()
+    {
+        return $this->belongsTo(PaymentType::class);
+    }
 }

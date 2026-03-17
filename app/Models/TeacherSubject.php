@@ -11,6 +11,12 @@ class TeacherSubject extends Model
     use UUID, SoftDeletes;
 
     protected $fillable = [
-        'name'
+        'name',
+        'description'
     ];
+
+    public function teacher()
+    {
+        return $this->hasMany(Teacher::class);
+    }
 }
