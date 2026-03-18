@@ -49,6 +49,13 @@ class User extends Authenticatable
         ];
     }
 
+    public function scopeSearch($query, $search)
+    {
+        return $query->where('name', 'Like', '%' . $search . '%')
+            ->orWhere('username', 'Like', '%' . $search . '%')
+        ;
+    }
+
     public function student()
     {
         return $this->hasOne(Student::class);
