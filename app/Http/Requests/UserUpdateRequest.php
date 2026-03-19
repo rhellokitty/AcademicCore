@@ -26,6 +26,7 @@ class UserUpdateRequest extends FormRequest
             'name' => 'required|string',
             'username' => 'required|string',
             'password' => 'nullable|string|min:8',
+            'role' => 'required|in:admin,super_admin,teacher,student',
         ];
     }
 }

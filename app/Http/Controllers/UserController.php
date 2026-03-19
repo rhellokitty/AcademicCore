@@ -162,7 +162,7 @@ class UserController extends Controller
                 );
             }
 
-            $user = $this->userRepositories->update($request, $id);
+            $user = $this->userRepositories->update($id, $request,);
 
             return ResponseHelper::jsonResponse(
                 true,

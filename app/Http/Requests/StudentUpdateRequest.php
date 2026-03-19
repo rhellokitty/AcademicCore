@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Student;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -22,14 +23,20 @@ class StudentUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
+
+        $userId = Student::find($this->route('student'))?->user_id;
+
         return [
-            // 'user_id' => 'required|exists:users,id',
-            // 'classroom_id' => 'nullable|exists:class_rooms,id',
-            'birth_date' => 'required|date',
-            'parent_name' => 'required|string',
-            'parent_number' => 'required|string',
-            'address' => 'required|string',
-            'status' => 'required|in:active,graduated,transfered,dropped_out',
+            'name' => 'sometimes|string',
+            'username' => 'sometimes|string|unique:users,username,' . $userId,
+            'password' => 'sometimes|string|min:8',
+            'role' => 'required|in:admin,super_admin,teacher,student',
+            'classroom_id' => 'sometimes|exists:class_rooms,id',
+            'birth_date' => 'sometimes|date',
+            'parent_name' => 'sometimes|string',
+            'parent_number' => 'sometimes|string',
+            'address' => 'sometimes|string',
+            'status' => 'sometimes|in:active,graduated,transfered,dropped_out',
         ];
     }
 }

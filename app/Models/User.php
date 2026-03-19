@@ -24,6 +24,7 @@ class User extends Authenticatable
         'name',
         'username',
         'password',
+        'role'
     ];
 
     /**
@@ -53,6 +54,7 @@ class User extends Authenticatable
     {
         return $query->where('name', 'Like', '%' . $search . '%')
             ->orWhere('username', 'Like', '%' . $search . '%')
+            ->orWhere('role', 'Like', '%' . $search . '%')
         ;
     }
 

@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface UserRepositoriesInterface
+interface TeacherRepositoriesInterface
 {
     public function getAll(
         ?string $search,
@@ -16,19 +16,6 @@ interface UserRepositoriesInterface
     );
 
     public function getById(
-        string $id
-    );
-
-    public function create(
-        array $data
-    );
-
-    public function update(
-        string $id,
-        array $data
-    );
-
-    public function delete(
         string $id
     );
 }

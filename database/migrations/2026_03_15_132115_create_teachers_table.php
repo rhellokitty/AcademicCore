@@ -15,11 +15,12 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             $table->foreignUuid('user_id')->constrained('users');
-            $table->foreignUuid('teacher_subject_id')->constrained('teacher_subjects');
+            $table->foreignUuid('teacher_subject_id')->nullable()->constrained('teacher_subjects');
 
             $table->string('phone_number');
             $table->string('email')->unique();
 
+            $table->softDeletes();
             $table->timestamps();
         });
     }

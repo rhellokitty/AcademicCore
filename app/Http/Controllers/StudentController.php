@@ -7,7 +7,6 @@ use App\Http\Requests\StudentStoreRequest;
 use App\Http\Requests\StudentUpdateRequest;
 use App\Http\Resources\StudentResource;
 use App\Interfaces\StudentRepositoriesInterface;
-use App\Models\Student;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -56,6 +55,8 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+
     public function store(StudentStoreRequest $request)
     {
         $request = $request->validated();
@@ -166,8 +167,39 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Student $student)
+    public function destroy(string $id)
     {
-        //
+        try {
+            $student = $this->studentRepositories->getById($id);
+
+            if (!$student) {
+                return ResponseHelper::jsonResponse(
+                    false,
+                    'Student Tidak Ditemukan',
+                    null,
+                    404
+                );
+            }
+
+            $student = $this->studentRepositories->delete($id);
+
+            return ResponseHelper::jsonResponse(
+                true,
+                'Student Berhasil Dihapus',
+                StudentResource::make($student),
+                200
+            );
+        } catch (Exception $e) {
+            return ResponseHelper::jsonResponse(
+                false,
+                'Student Gagal Dihapus',
+                [
+                    'error' => $e->getMessage(),
+                    'file'  => $e->getFile(),
+                    'line'  => $e->getLine(),
+                ],
+                500
+            );
+        }
     }
 }
