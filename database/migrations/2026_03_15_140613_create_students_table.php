@@ -15,13 +15,13 @@ return new class extends Migration
             $table->uuid('id')->primary();
 
             $table->foreignUuid('user_id')->constrained('users');
-            $table->foreignUuid('classroom_id')->constrained('class_rooms');
+            $table->foreignUuid('classroom_id')->nullable()->constrained('class_rooms');
 
             $table->date('birth_date');
             $table->string('parent_name');
             $table->string('parent_number');
             $table->string('address');
-            $table->enum('status', ['active', 'graduated', 'transfered', 'dropped_out']);
+            $table->enum('status', ['active', 'graduated', 'transfered', 'dropped_out'])->default('active');
             $table->softDeletes();
             $table->timestamps();
         });

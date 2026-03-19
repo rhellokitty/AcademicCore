@@ -69,7 +69,7 @@ class UserRepositories implements UserRepositoriesInterface
             $user->username = $data['username'];
 
             if (isset($data['password'])) {
-                $user->username = bcrypt($data['password']);
+                $user->password = bcrypt($data['password']);
             }
 
             $user->save();
